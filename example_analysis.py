@@ -104,17 +104,17 @@ try:
         plt.savefig('truss_axial_force.png', dpi=300, bbox_inches='tight')
         print("  - 축력도: truss_axial_force.png")
     
-    # 휨모멘트도
-    fig = ss.show_bending_moment(show=False, figsize=(16, 8), verbosity=1)
-    if fig is not None:
-        plt.savefig('truss_bending_moment.png', dpi=300, bbox_inches='tight')
-        print("  - 휨모멘트도: truss_bending_moment.png")
-    
     # 전단력도
     fig = ss.show_shear_force(show=False, figsize=(16, 8), verbosity=1)
     if fig is not None:
         plt.savefig('truss_shear_force.png', dpi=300, bbox_inches='tight')
         print("  - 전단력도: truss_shear_force.png")
+    
+    # 휨모멘트도
+    fig = ss.show_bending_moment(show=False, figsize=(16, 8), verbosity=1)
+    if fig is not None:
+        plt.savefig('truss_bending_moment.png', dpi=300, bbox_inches='tight')
+        print("  - 휨모멘트도: truss_bending_moment.png")
     
     # 반력도
     fig = ss.show_reaction_force(show=False, figsize=(16, 8), verbosity=1)
