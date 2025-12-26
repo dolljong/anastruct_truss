@@ -39,7 +39,13 @@
 
 - `truss_model.py`: 트러스 모델 생성 메인 스크립트
 - `visualize_truss.py`: 트러스 구조 시각화 및 이미지 저장 스크립트
+- `example_analysis.py`: 구조 해석 및 결과 시각화 예제 스크립트
 - `truss_structure.png`: 생성된 트러스 구조 시각화 이미지
+- `truss_displacement.png`: 변위도
+- `truss_axial_force.png`: 축력도
+- `truss_shear_force.png`: 전단력도
+- `truss_bending_moment.png`: 휨모멘트도
+- `truss_reaction_force.png`: 반력도
 
 ## 설치 방법
 
@@ -67,7 +73,26 @@ python visualize_truss.py
 
 이 명령은 트러스 구조를 시각화하여 `truss_structure.png` 파일로 저장합니다.
 
-### 3. Python 코드에서 사용
+### 3. 구조 해석 및 결과 시각화
+
+```bash
+python example_analysis.py
+```
+
+이 명령은 다음 작업을 수행합니다:
+- 트러스 구조에 하중을 적용 (상현재 각 격점에 100kN 하향 하중)
+- 구조 해석 수행 (`ss.solve()`)
+- 지점 반력 계산 및 출력
+- 최대 변위 계산 및 출력
+- 최대 축력 계산 및 출력
+- 해석 결과를 다음과 같은 그래프로 저장:
+  - `truss_displacement.png`: 변위도
+  - `truss_axial_force.png`: 축력도
+  - `truss_shear_force.png`: 전단력도
+  - `truss_bending_moment.png`: 휨모멘트도
+  - `truss_reaction_force.png`: 반력도
+
+### 4. Python 코드에서 사용
 
 ```python
 from truss_model import create_truss_model
@@ -109,8 +134,9 @@ ss.solve()
 
 # 결과 확인
 ss.show_displacement()  # 변위 표시
-ss.show_bending_moment()  # 휨모멘트 표시
 ss.show_axial_force()  # 축력 표시
+ss.show_shear_force()  # 전단력 표시
+ss.show_bending_moment()  # 휨모멘트 표시
 ss.show_reaction_force()  # 반력 표시
 ```
 
