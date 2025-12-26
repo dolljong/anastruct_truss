@@ -44,3 +44,6 @@ Thumbs.db
 
 # mypy
 .mypy_cache/
+
+# Generated visualization files
+*.png
