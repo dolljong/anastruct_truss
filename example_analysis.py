@@ -38,16 +38,7 @@ print("="*60)
 # 반력 계산
 print("\n지점 반력:")
 for node_id, node in ss.node_map.items():
-    # 지점이 있는 노드만 확인 (Fx, Fy가 0이 아닌 경우)
-    has_support = False
-    if hasattr(node, 'hinge') and node.hinge:
-        has_support = True
-        support_type = "힌지"
-    if hasattr(node, 'roll') and node.roll:
-        has_support = True
-        support_type = "롤러"
-    
-    # 또는 좌표로 확인
+    # 좌표로 지점 확인
     if abs(node.vertex.x) < 0.01 and abs(node.vertex.y) < 0.01:
         # 시작점 힌지
         Rx = node.Fx if hasattr(node, 'Fx') else 0

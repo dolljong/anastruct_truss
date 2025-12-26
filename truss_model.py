@@ -107,8 +107,8 @@ def create_truss_model():
     
     # 모든 부재에 속성 적용
     for element_id in range(1, ss.id_last_element + 1):
-        ss.EA = EA
-        ss.EI = EI
+        ss.element_map[element_id].EA = EA
+        ss.element_map[element_id].EI = EI
     
     # 모델 정보 출력
     print("=" * 60)
