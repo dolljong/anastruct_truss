@@ -5,7 +5,8 @@
 1. 전체 길이: 48m, 격점 간격: 6m, 총 8개 bay
 2. 트러스 높이: 12m
 3. 모든 격점에서 상현재와 하현재를 연결하는 수직재 존재
-4. 중앙 격점에서 시작하여 대각선으로 연결되는 사재 (우측 대칭)
+4. 사재는 중앙 하현재 격점에서 바로 전 상현재 격점으로 시작하여,
+   이전 하현재 격점에서 이전 상현재 격점으로 반복 연결 (우측 대칭)
 5. 지점 조건: 하현재 시작점 힌지, 끝점 롤러
 6. 부재: 0.8x0.8m 두께 20mm 강재 각관
 """
@@ -44,19 +45,24 @@ def create_truss_model():
         ss.add_element(location=[bottom_nodes[i], top_nodes[i]])
     
     # 4. 사재 생성 (diagonal members)
-    # 중앙 격점에서 시작하여 대각선으로 연결
+    # 중앙 하현재 격점에서 바로 전 상현재 격점으로 시작하여
+    # 이전 하현재 격점에서 이전 상현재 격점으로 반복 연결
     # 중앙 격점은 인덱스 4 (0부터 8까지 중 4번째)
     center_index = num_bays // 2  # 4
     
-    # 좌측 사재: 중앙에서 좌측으로
+    # 좌측 사재: 중앙에서 좌측으로 이전 격점 간 연결
+    # center_index(4) → top(3), bottom(3) → top(2), bottom(2) → top(1), bottom(1) → top(0)
     for i in range(center_index):
-        # 하현재의 center_index에서 상현재의 i로 연결
-        ss.add_element(location=[bottom_nodes[center_index], top_nodes[i]])
+        bottom_idx = center_index - i
+        top_idx = center_index - i - 1
+        ss.add_element(location=[bottom_nodes[bottom_idx], top_nodes[top_idx]])
     
-    # 우측 사재: 중앙에서 우측으로 (대칭)
-    for i in range(center_index + 1, num_bays + 1):
-        # 하현재의 center_index에서 상현재의 i로 연결
-        ss.add_element(location=[bottom_nodes[center_index], top_nodes[i]])
+    # 우측 사재: 중앙을 기준으로 대칭
+    # center_index(4) → top(5), bottom(5) → top(6), bottom(6) → top(7), bottom(7) → top(8)
+    for i in range(center_index):
+        bottom_idx = center_index + i
+        top_idx = center_index + i + 1
+        ss.add_element(location=[bottom_nodes[bottom_idx], top_nodes[top_idx]])
     
     # 5. 지점 조건 설정
     # 노드 ID 찾기: 하현재 시작점(0,0)과 끝점(48,0)
