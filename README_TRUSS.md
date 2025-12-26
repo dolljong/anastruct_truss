@@ -70,7 +70,21 @@ python visualize_truss.py
 
 이 명령은 트러스 구조를 시각화하여 `truss_structure.png` 파일로 저장합니다.
 
-### 3. Python 코드에서 사용
+### 3. 구조 해석 예제
+
+```bash
+python example_analysis.py
+```
+
+이 명령은 트러스 구조에 상현재 각 격점에 100kN 하향 하중을 적용하고 구조 해석을 수행합니다.
+해석 결과는 다음 파일로 저장됩니다:
+- `truss_displacement.png`: 변위도
+- `truss_axial_force.png`: 축력도
+- `truss_shear_force.png`: 전단력도 (NEW)
+- `truss_bending_moment.png`: 휨모멘트도
+- `truss_reaction_force.png`: 반력도
+
+### 4. Python 코드에서 사용
 
 ```python
 from truss_model import create_truss_model
@@ -123,8 +137,9 @@ ss.solve()
 
 # 결과 확인
 ss.show_displacement()  # 변위 표시
-ss.show_bending_moment()  # 휨모멘트 표시
 ss.show_axial_force()  # 축력 표시
+ss.show_shear_force()  # 전단력 표시
+ss.show_bending_moment()  # 휨모멘트 표시
 ss.show_reaction_force()  # 반력 표시
 ```
 

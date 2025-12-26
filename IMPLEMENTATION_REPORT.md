@@ -71,11 +71,12 @@ anastruct 라이브러리를 사용하여 48m × 12m 트러스 구조물을 모�
 6. **truss_structure.png** - 트러스 구조 전체 도면
 7. **truss_displacement.png** - 변위도
 8. **truss_axial_force.png** - 축력도
-9. **truss_bending_moment.png** - 휨모멘트도
-10. **truss_reaction_force.png** - 반력도
+9. **truss_shear_force.png** - 전단력도 (NEW)
+10. **truss_bending_moment.png** - 휨모멘트도
+11. **truss_reaction_force.png** - 반력도
 
 ### 기타 파일
-11. **.gitignore** - Python 프로젝트용 Git 제외 파일 설정
+11. **.gitignore** - Python 프로젝트용 Git 제외 파일 설정 (트러스 분석 결과 이미지는 포함)
 
 ## 검증 결과
 
@@ -152,3 +153,42 @@ ss.show_axial_force()
 
 ## Security Summary
 CodeQL 보안 검사 결과: **취약점 없음** (0 alerts)
+
+---
+
+## Update: 재해석 및 전단력 시각화 추가 (2025-12-26)
+
+### 추가된 기능
+1. **전단력 시각화**: `example_analysis.py`에 전단력도(shear force diagram) 생성 기능 추가
+   - `ss.show_shear_force()` 메서드를 사용하여 전단력 분포 시각화
+   - 결과는 `truss_shear_force.png` 파일로 저장
+
+2. **완전한 구조 해석 결과**: 이제 다음 5가지 결과를 모두 시각화
+   - 변위도 (Displacement)
+   - 축력도 (Axial Force)
+   - 전단력도 (Shear Force) - NEW
+   - 휨모멘트도 (Bending Moment)
+   - 반력도 (Reaction Force)
+
+3. **문서 업데이트**: README.md 및 README_TRUSS.md에 전단력 시각화 관련 내용 추가
+
+### 해석 결과 요약 (100kN × 9개 하중)
+- **지점 반력**:
+  - 좌측 힌지: Rx = 0.00 kN, Ry = 450.00 kN
+  - 우측 롤러: Ry = 450.00 kN
+- **최대 변위**: 2.54m (중앙 상현재 격점)
+- **구조 평형**: ✓ 만족 (반력 합계 = 하중 합계 = 900 kN)
+
+### 변경된 파일
+- `example_analysis.py`: 전단력 시각화 코드 추가
+- `.gitignore`: 트러스 분석 결과 이미지 포함 설정
+- `README.md`: 전단력 시각화 설명 추가
+- `README_TRUSS.md`: 전단력 시각화 사용법 추가
+- `IMPLEMENTATION_REPORT.md`: 업데이트 내역 추가
+
+### 생성된 결과 파일
+- `truss_displacement.png`
+- `truss_axial_force.png`
+- `truss_shear_force.png` - NEW
+- `truss_bending_moment.png`
+- `truss_reaction_force.png`

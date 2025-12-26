@@ -36,6 +36,13 @@ python visualize_truss.py
 python example_analysis.py
 ```
 
+이 명령은 트러스 구조에 하중을 적용하고 구조 해석을 수행하여 다음 결과를 생성합니다:
+- 변위도 (truss_displacement.png)
+- 축력도 (truss_axial_force.png)
+- 전단력도 (truss_shear_force.png)
+- 휨모멘트도 (truss_bending_moment.png)
+- 반력도 (truss_reaction_force.png)
+
 ## 트러스 사양
 
 - 전체 길이: 48m (8 bays × 6m)
