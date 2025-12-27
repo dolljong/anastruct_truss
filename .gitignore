@@ -46,4 +46,6 @@ Thumbs.db
 .mypy_cache/
 
 # Generated visualization files
+# Exclude PNG files first, then allow truss analysis result images
 *.png
+!truss_*.png
